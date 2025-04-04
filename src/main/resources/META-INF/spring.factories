@@ -1,0 +1,4 @@
+#???????=??????????   ctrl+alt + ?? ??????
+org.springframework.context.ApplicationContextInitializer=com.example.mybatisdemo.initializer.MyApplicationContextInitializer
+
+org.springframework.context.ApplicationListener=com.example.mybatisdemo.listener.MyListener

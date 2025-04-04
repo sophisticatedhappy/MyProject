@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisdemo.demos.web.mapper.SubjectMapper">
+
+    <sql id="Base_Column_List">
+        id, title, parent_id, sort, create_time, update_time , is_deleted
+    </sql>
+
+    <!-- 批量插入 Subject 列表（单条 SQL 语句） -->
+    <insert id="batchSave">
+        INSERT INTO subject
+        (
+        <include refid="Base_Column_List"/>
+        ) VALUES
+        <foreach collection="list" item="subject" separator=",">
+            (
+            #{subject.id},
+            #{subject.title},
+            #{subject.parentId},
+            #{subject.sort},
+            #{subject.createTime},
+            #{subject.updateTime},
+            #{subject.isDeleted}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateById">
+        UPDATE subject
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="subject.title != null">title = #{subject.title},</if>
+            <if test="subject.parentId != null">parent_id = #{subject.parentId},</if>
+            <if test="subject.sort != null">sort = #{subject.sort},</if>
+            <if test="subject.createTime != null">create_time = #{subject.createTime},</if>
+            <if test="subject.updateTime != null">update_time = #{subject.updateTime},</if>
+            <if test="subject.isDeleted != null">is_deleted = #{subject.isDeleted},</if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectAll" resultType="com.example.mybatisdemo.demos.web.entity.Subject">
+        select <include refid="Base_Column_List" /> from subject
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.example.mybatisdemo.demos.web.entity.Subject">
+        select <include refid="Base_Column_List" /> from subject
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>
