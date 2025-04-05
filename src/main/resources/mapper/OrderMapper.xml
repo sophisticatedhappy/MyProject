@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mybatisdemo.demos.web.mapper.OrderMapper">
+
+    <resultMap id="OrderResultMap" type="com.example.mybatisdemo.demos.web.entity.Order">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="customer_no" property="customerNo"/>
+        <result column="warehouse_code" property="warehouseCode"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="country" property="country"/>
+        <result column="state" property="state"/>
+        <result column="city" property="city"/>
+        <result column="street" property="street"/>
+        <result column="zip_code" property="zipCode"/>
+        <result column="contact_email" property="contactEmail"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="contact_mobile" property="contactMobile"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <!-- 批量保存订单 -->
+    <insert id="batchSave">
+        INSERT INTO t_order (
+        order_no,
+        customer_no,
+        warehouse_code,
+        order_status,
+        country,
+        state,
+        city,
+        street,
+        zip_code,
+        contact_email,
+        contact_name,
+        contact_mobile,
+        create_time,
+        update_time,
+        deleted
+        ) VALUES
+        <foreach collection="orders" item="order" separator=",">
+            (
+            #{order.orderNo},
+            #{order.customerNo},
+            #{order.warehouseCode},
+            #{order.orderStatus},
+            #{order.country},
+            #{order.state},
+            #{order.city},
+            #{order.street},
+            #{order.zipCode},
+            #{order.contactEmail},
+            #{order.contactName},
+            #{order.contactMobile},
+            #{order.createTime},
+            #{order.updateTime},
+            #{order.deleted}
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectAll" resultMap="OrderResultMap">
+        select *
+        from t_order;
+    </select>
+
+
+
+
+</mapper>

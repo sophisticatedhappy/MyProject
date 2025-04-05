@@ -2,19 +2,21 @@ package com.example.mybatisdemo;
 
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteWorkbook;
+import com.example.mybatisdemo.demos.web.entity.Order;
 import com.example.mybatisdemo.demos.web.entity.Subject;
-import com.example.mybatisdemo.demos.web.mapper.SubjectMapper;
+import com.example.mybatisdemo.demos.web.faker.OrderDataGenerator;
+import com.example.mybatisdemo.demos.web.mapper.OrderMapper;
 import com.example.mybatisdemo.demos.web.service.SubjectService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static java.util.function.Function.identity;
@@ -26,8 +28,12 @@ class MybatisDemoApplicationTests {
     @Autowired
     private SubjectService subjectMapper;
 
+
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+
+    @Autowired
+    private OrderMapper orderMapper;
 
 
     @Test
@@ -82,6 +88,33 @@ class MybatisDemoApplicationTests {
         WriteWorkbook workbook = new WriteWorkbook();
 
         ExcelWriter excelWriter = new ExcelWriter(workbook);
+    }
+
+    @Test
+    void testFaker(){
+        Order order = OrderDataGenerator.generateRandomOrder();
+        System.out.println(order);
+    }
+
+    @Test
+    void insertData(){
+        batchSave();
+    }
+
+    public void batchSave() {
+
+        //2000 0000
+        for(int i = 0;i< 4000 ; i++){
+
+            List<Order> orders = new ArrayList<>();
+            for(int j = 0;j < 5000 ;j++){
+                Order order = OrderDataGenerator.generateRandomOrder();
+                orders.add(order);
+            }
+
+            orderMapper.batchSave(orders);
+        }
+
     }
 
 }
