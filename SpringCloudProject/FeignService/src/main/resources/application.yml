@@ -1,0 +1,31 @@
+
+
+
+cloud:
+  nacos:
+    discovery:
+      # 注册地址，不需要写协议
+      server-addr: 127.0.0.1:8848
+      namespace: public
+      # 命名空间，不同命名空间之间不能调用，用于环境隔离
+      # 开发环境
+      # namespace: acd952e0-7c60-4c6b-9854-6daa22d12d4c
+      # 生产环境
+      # namespace: 534c904d-7f24-4086-acbd-daf628cb1446
+
+      # 分组，不同分组之间不能调用，用于微服务之间的隔离
+      group: DEFAULT_GROUP
+
+      # 集群名称【有 BJ 和 NJ】，不同集群之间可以调用，但是在设计负载均衡策略的时候要避免跨机房集群调用
+      # cluster-name: BJ
+
+      # 元数据，让配置更加灵活
+      metadata:
+        # 比如灰度发布时，可以跨集群调用，但是不能跨版本调用
+        version: v1
+server:
+  port: 8083
+
+spring:
+  application:
+    name: FeignService

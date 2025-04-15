@@ -8,6 +8,9 @@
     <name>MybatisDemo</name>
     <description>MybatisDemo</description>
 
+
+    <packaging>pom</packaging>
+
 <!--    <packaging>pom</packaging>-->
 
 <!--    <modules>-->
