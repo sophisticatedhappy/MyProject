@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.gulimallpms.mapper.PmsCategoryMapper">
+
+    <resultMap id="PmsCategoryMap" type="com.example.gulimallpms.entity.PmsCategory">
+        <id column="cat_id" property="catId"/>
+        <result column="name" property="name"/>
+        <result column="parent_cid" property="parentCid"/>
+        <result column="cat_level" property="catLevel"/>
+        <result column="show_status" property="showStatus"/>
+        <result column="sort" property="sort"/>
+        <result column="icon" property="icon"/>
+        <result column="product_unit" property="productUnit"/>
+        <result column="product_count" property="productCount"/>
+    </resultMap>
+
+    <select id="selectByCatLevel" resultMap="PmsCategoryMap">
+        SELECT *
+        FROM pms_category
+        WHERE cat_level = #{catLevel}
+    </select>
+
+
+
+</mapper>

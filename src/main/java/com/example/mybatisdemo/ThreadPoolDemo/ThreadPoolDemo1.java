@@ -1,9 +1,6 @@
 package com.example.mybatisdemo.ThreadPoolDemo;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class ThreadPoolDemo1 {
 
@@ -12,7 +9,6 @@ public class ThreadPoolDemo1 {
     private static final int QUEUE_CAPACITY = 100;
     private static final Long KEEP_ALIVE_TIME = 1L;
     public static void main(String[] args) {
-
 
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
                 CORE_POOL_SIZE,
@@ -23,7 +19,7 @@ public class ThreadPoolDemo1 {
                 new ThreadPoolExecutor.CallerRunsPolicy()
         );
 
-        for(int i =0; i< 10;i++){
+        for(int i =0; i< 100;i++){
             Runnable runnable = new MyRunnable("第"+ (i+1) + "个任务正在处理中...");
             Future<?> submit = threadPoolExecutor.submit(runnable);
         }
