@@ -12,6 +12,7 @@
 
     <modules>
         <module>FeignService</module>
+        <module>DemoProject</module>
     </modules>
 
     <properties>
