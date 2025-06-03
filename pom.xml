@@ -13,9 +13,10 @@
 
 <!--    <packaging>pom</packaging>-->
 
-<!--    <modules>-->
-<!--        <module>GuliMallPms</module>-->
-<!--    </modules>-->
+    <modules>
+        <module>GuliMallPms</module>
+        <module>GuliMallAdmin</module>
+    </modules>
 
     <properties>
         <java.version>1.8</java.version>
