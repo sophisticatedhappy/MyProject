@@ -85,5 +85,13 @@
       <artifactId>logback-classic</artifactId>
       <version>1.5.18</version>
     </dependency>
+<!--    springboot test的依赖-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>3.4.2</version>
+    </dependency>
+
+
   </dependencies>
 </project>
