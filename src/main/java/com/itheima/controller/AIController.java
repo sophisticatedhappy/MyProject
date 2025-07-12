@@ -42,4 +42,9 @@ public class AIController {
         Flux<String> stringFlux = consultantService.chatOne(memoryId,message);
         return stringFlux;
     }
+
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello";
+    }
 }
