@@ -47,4 +47,9 @@ public class AIController {
     public String hello(){
         return "hello";
     }
+
+    @GetMapping("/world")
+    public String world(){
+        return "world";
+    }
 }
